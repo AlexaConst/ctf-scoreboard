@@ -22,7 +22,7 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] { height: 50px; white-space: pre-wrap; background-color: #F0F2F5; border-radius: 4px 4px 0px 0px; padding: 10px 20px; font-weight: 600; }
     .stTabs [aria-selected="true"] { background-color: #0070AD !important; color: white !important; }
     </style>
-""", unsafe_unsafe_override_html=True)
+""", unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
 # GLOBAL IN-MEMORY DATABASE STRUCTURE (Shared across all user sessions)
@@ -143,7 +143,6 @@ class CTFDatabase:
     def get_sorted_leaderboard(self):
         def sort_key(item):
             r_data = item[1]
-            # Tie-breakers: 1. Points (Desc), 2. Advanced Flags (Desc), 3. Industrialization Bonus (Desc), 4. Completion Time (Asc)
             ctime = r_data["completion_timestamp"] if r_data["completion_timestamp"] is not None else float('inf')
             return (-r_data["points"], -r_data["advanced_flags_count"], -r_data["industrialization_bonus_points"], ctime)
         return sorted(self.rooms.items(), key=sort_key)
@@ -329,7 +328,7 @@ with tab3:
             for f_idx, f_info in r_data["flags"].items():
                 if f_info["status"] == "Pending Facilitator Review":
                     pending_count += 1
-                    st.markdown(f"<div class='facilitator-box'>", unsafe_allow_html=True)
+                    st.markdown("<div class='facilitator-box'>", unsafe_allow_html=True)
                     st.markdown(f"#### 🚪 {r_name} ({r_data['track']}) — Requesting Approval for **{f_idx}**")
                     st.markdown(f"**Submitted Flag String:** `{f_info['target_code']}`")
                     
@@ -428,15 +427,15 @@ with tab4:
     with col_a:
         st.markdown("""
         ### ⏱️ Session Timeline Framework (3 Hours)
-        * **0:00–0:15** | Kickoff + Challenge Rules Presentation + Role Mapping 
+        * **0:00–0:15** | Kickoff + Challenge Rules Presentation + Role Mapping
         * **0:15–0:25** | Workspace Onboarding & Challenge Lab Briefings
         * **0:25–1:45** | Active Challenge Execution (Unlocking Flags 1, 2 & 3)
         * **1:45–2:20** | Stretch Flag Sprint + Industrialization Value Wraps
-        * **2:20–2:50** | Facilitator Review Desk Validations & Live Demos [cite: 4928]
+        * **2:20–2:50** | Facilitator Review Desk Validations & Live Demos
         * **2:50–3:00** | Proclamation of Winners + Executive Key Takeaway Synthesis
         
         ### 👥 Mixed-Audience Role Assignments (5-6 Pax per Team)
-        To ensure technical and non-technical participants contribute equally, ensure teams assign: [cite: 5200]
+        To ensure technical and non-technical participants contribute equally, ensure teams assign:
         1. **Prompt Lead** – Crafts, tests, and refines system instruction prompts.
         2. **Builder** – Manages software script execution, workflow nodes, and tools.
         3. **Investigator** – uncovers code comments, files, and image-based hints.
@@ -447,16 +446,16 @@ with tab4:
     with col_b:
         st.markdown("""
         ### ⚖️ Master Scoring Metric System
-        * **Easy Flag (Flag 1):** `100 Points` [cite: 4526, 4652, 4668]
-        * **Medium Flag (Flag 2):** `200 Points` [cite: 4546, 4668]
-        * **Advanced Flag (Flag 3):** `300 Points` [cite: 4593]
-        * **Stretch Industrialization Flag (Flag 4):** `300 Points` [cite: 4593]
+        * **Easy Flag (Flag 1):** `100 Points`
+        * **Medium Flag (Flag 2):** `200 Points`
+        * **Advanced Flag (Flag 3):** `300 Points`
+        * **Stretch Industrialization Flag (Flag 4):** `300 Points`
         * **Explanation/Collaboration Bonuses:** `+50 Points Each`
-        * **Industrialization High-Performer Bonus:** `+100 Points` [cite: 4593, 5038, 5102, 5172]
-        * **Hint Penalties:** First 2 free per room, Final hint triggers `-50 Points`. [cite: 4947, 4948]
+        * **Industrialization High-Performer Bonus:** `+100 Points`
+        * **Hint Penalties:** First 2 free per room, Final hint triggers `-50 Points`.
         
         ### 🧠 Strategic Facilitator Behavioral Code
-        * **Encourage:** Collaboration, rapid prompt testing, process simplification. [cite: 5185, 5186, 5187, 5188]
-        * **Say Things Like:** *"Make your prompt more specific"*, *"What is the absolute simplest version of this flow?"*, *"How could another project team reuse this code asset?"* [cite: 5190, 5191, 5192]
-        * **Strictly Avoid:** Providing direct answers, writing the code for them, or accepting guesses. [cite: 4943, 4950, 5194, 5195]
-        
+        * **Encourage:** Collaboration, rapid prompt testing, process simplification.
+        * **Say Things Like:** *"Make your prompt more specific"*, *"What is the absolute simplest version of this flow?"*, *"How could another project team reuse this code asset?"*
+        * **Strictly Avoid:** Providing direct answers, writing the code for them, or accepting guesses.
+        """)
