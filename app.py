@@ -459,4 +459,4 @@ with tab4:
         * **Encourage:** Collaboration, rapid prompt testing, process simplification. [cite: 5185, 5186, 5187, 5188]
         * **Say Things Like:** *"Make your prompt more specific"*, *"What is the absolute simplest version of this flow?"*, *"How could another project team reuse this code asset?"* [cite: 5190, 5191, 5192]
         * **Strictly Avoid:** Providing direct answers, writing the code for them, or accepting guesses. [cite: 4943, 4950, 5194, 5195]
-        """)
+        
